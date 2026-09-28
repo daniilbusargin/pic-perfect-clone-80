@@ -20,8 +20,8 @@ function Docs() {
     setTimeout(() => {
       setDocStatus(id, isPaid ? "ok" : "uploaded", {
         note: isPaid ? "Документ соответствует базовым требованиям" : "Загружен. Проверка доступна в Pro",
-        checks: isPaid ? [{ label: "Базовые требования выполнены", ok: true }] : undefined,
-        fix: undefined,
+        checks: isPaid ? [{ label: "Базовые требования выполнены", ok: true }] : [],
+        fix: "",
       });
       addHistory(`Загружен документ: ${title}`);
       toast.success(`${title}: загружено`);
