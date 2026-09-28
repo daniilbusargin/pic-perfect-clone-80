@@ -1,0 +1,29 @@
+# API Gateway spec: proxies every request to the Visitalia Serverless Container.
+# Replace <CONTAINER_ID> and <RUNTIME_SA_ID> before creating the gateway
+# (see deploy/yandex/README.md).
+openapi: 3.0.0
+info:
+  title: visitalia
+  version: 1.0.0
+paths:
+  /:
+    x-yc-apigateway-any-method:
+      x-yc-apigateway-integration:
+        type: serverless_containers
+        container_id: <CONTAINER_ID>
+        service_account_id: <RUNTIME_SA_ID>
+  /{proxy+}:
+    x-yc-apigateway-any-method:
+      x-yc-apigateway-integration:
+        type: serverless_containers
+        container_id: <CONTAINER_ID>
+        service_account_id: <RUNTIME_SA_ID>
+      parameters:
+        - explode: false
+          in: path
+          name: proxy
+          required: false
+          schema:
+            default: "-"
+            type: string
+          style: simple
