@@ -40,24 +40,29 @@ function Pricing() {
   };
   return (
     <div className="min-h-screen bg-background">
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5">
+      <header className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
         <Logo />
         <Button asChild variant="outline"><Link to={state.authed ? "/app" : "/auth"}>{state.authed ? "В кабинет" : "Войти"}</Link></Button>
       </header>
-      <section className="mx-auto max-w-6xl px-5 py-10">
-        <h1 className="font-display text-5xl text-foreground">Тарифы</h1>
-        <p className="mt-3 text-muted-foreground">Оплата один раз за визовый кейс, действует 6 месяцев.</p>
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+      <section className="mx-auto max-w-5xl px-5 py-16">
+        <div className="text-center">
+          <h1 className="text-4xl text-foreground sm:text-5xl">Тарифы</h1>
+          <p className="mt-3 text-lg text-muted-foreground">Оплата один раз за визовый кейс, действует 6 месяцев.</p>
+        </div>
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
           {plans.map((p) => (
-            <div key={p.id} className={cn("flex flex-col rounded-2xl border bg-card p-6", p.id === "premium" ? "border-premium/40" : "border-border")}>
-              <p className="font-semibold text-foreground">{p.name}</p>
-              <p className="mt-2 font-display text-4xl text-foreground">{p.price}</p>
-              <ul className="mt-5 flex-1 space-y-2">
+            <div key={p.id} className={cn("flex flex-col rounded-3xl border bg-card p-7", p.id === "pro" ? "border-primary shadow-[var(--shadow-lift)]" : "border-border")}>
+              <div className="flex items-center justify-between">
+                <p className="font-semibold text-foreground">{p.name}</p>
+                {p.id === "pro" ? <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">Популярный</span> : null}
+              </div>
+              <p className="mt-3 text-4xl font-semibold tracking-tight text-foreground">{p.price}</p>
+              <ul className="mt-6 flex-1 space-y-2.5">
                 {p.items.map((i) => (
-                  <li key={i} className="flex gap-2 text-sm text-foreground"><Check className="h-4 w-4 text-success" />{i}</li>
+                  <li key={i} className="flex gap-2 text-sm text-foreground"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{i}</li>
                 ))}
               </ul>
-              <Button className="mt-6" variant={state.plan === p.id && state.authed ? "outline" : "default"} onClick={() => choose(p.id)}>
+              <Button className="mt-7" variant={state.plan === p.id && state.authed ? "outline" : p.id === "pro" ? "default" : "secondary"} onClick={() => choose(p.id)}>
                 {state.plan === p.id && state.authed ? "Текущий тариф" : "Выбрать"}
               </Button>
             </div>

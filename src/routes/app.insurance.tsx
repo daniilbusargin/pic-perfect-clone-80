@@ -29,7 +29,7 @@ function Ins() {
             <div key={o.provider} className="rounded-xl border border-border bg-card p-5">
               <p className="font-semibold text-foreground">{o.provider}</p>
               <p className="mt-1 text-sm text-muted-foreground">Покрытие {o.coverage}</p>
-              <p className="mt-3 font-display text-3xl text-foreground">{o.price} ₽</p>
+              <p className="mt-3 text-3xl font-semibold tracking-tight text-foreground">{o.price} ₽</p>
               <Button className="mt-4 w-full" variant={chosen ? "outline" : "default"} disabled={chosen}
                 onClick={() => { update({ insurance: { ...o, period } }); setDocStatus("insurance", "ok", { note: `Полис ${o.provider}` }); addHistory(`Оформлена страховка ${o.provider}`); toast.success("Полис оформлен"); }}>
                 {chosen ? "Оформлено" : "Оформить"}
