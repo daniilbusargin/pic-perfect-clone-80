@@ -13,6 +13,18 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAccountRouteImport } from './routes/app.account'
+import { Route as AppAppointmentRouteImport } from './routes/app.appointment'
+import { Route as AppCaseRouteImport } from './routes/app.case'
+import { Route as AppDocumentsRouteImport } from './routes/app.documents'
+import { Route as AppFormRouteImport } from './routes/app.form'
+import { Route as AppHelpRouteImport } from './routes/app.help'
+import { Route as AppInsuranceRouteImport } from './routes/app.insurance'
+import { Route as AppReviewRouteImport } from './routes/app.review'
+import { Route as AppSubmissionRouteImport } from './routes/app.submission'
+import { Route as AppTripRouteImport } from './routes/app.trip'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,39 +46,183 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAccountRoute = AppAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAppointmentRoute = AppAppointmentRouteImport.update({
+  id: '/appointment',
+  path: '/appointment',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCaseRoute = AppCaseRouteImport.update({
+  id: '/case',
+  path: '/case',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDocumentsRoute = AppDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFormRoute = AppFormRouteImport.update({
+  id: '/form',
+  path: '/form',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHelpRoute = AppHelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInsuranceRoute = AppInsuranceRouteImport.update({
+  id: '/insurance',
+  path: '/insurance',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReviewRoute = AppReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSubmissionRoute = AppSubmissionRouteImport.update({
+  id: '/submission',
+  path: '/submission',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTripRoute = AppTripRouteImport.update({
+  id: '/trip',
+  path: '/trip',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/app': typeof AppRoute
+  '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/onboarding': typeof OnboardingRoute
+  '/pricing': typeof PricingRoute
+  '/app/account': typeof AppAccountRoute
+  '/app/appointment': typeof AppAppointmentRoute
+  '/app/case': typeof AppCaseRoute
+  '/app/documents': typeof AppDocumentsRoute
+  '/app/form': typeof AppFormRoute
+  '/app/help': typeof AppHelpRoute
+  '/app/insurance': typeof AppInsuranceRoute
+  '/app/review': typeof AppReviewRoute
+  '/app/submission': typeof AppSubmissionRoute
+  '/app/trip': typeof AppTripRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/onboarding': typeof OnboardingRoute
+  '/pricing': typeof PricingRoute
+  '/app/account': typeof AppAccountRoute
+  '/app/appointment': typeof AppAppointmentRoute
+  '/app/case': typeof AppCaseRoute
+  '/app/documents': typeof AppDocumentsRoute
+  '/app/form': typeof AppFormRoute
+  '/app/help': typeof AppHelpRoute
+  '/app/insurance': typeof AppInsuranceRoute
+  '/app/review': typeof AppReviewRoute
+  '/app/submission': typeof AppSubmissionRoute
+  '/app/trip': typeof AppTripRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/app': typeof AppRoute
+  '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/onboarding': typeof OnboardingRoute
+  '/pricing': typeof PricingRoute
+  '/app/account': typeof AppAccountRoute
+  '/app/appointment': typeof AppAppointmentRoute
+  '/app/case': typeof AppCaseRoute
+  '/app/documents': typeof AppDocumentsRoute
+  '/app/form': typeof AppFormRoute
+  '/app/help': typeof AppHelpRoute
+  '/app/insurance': typeof AppInsuranceRoute
+  '/app/review': typeof AppReviewRoute
+  '/app/submission': typeof AppSubmissionRoute
+  '/app/trip': typeof AppTripRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/auth' | '/onboarding'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/onboarding'
+    | '/pricing'
+    | '/app/account'
+    | '/app/appointment'
+    | '/app/case'
+    | '/app/documents'
+    | '/app/form'
+    | '/app/help'
+    | '/app/insurance'
+    | '/app/review'
+    | '/app/submission'
+    | '/app/trip'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app' | '/auth' | '/onboarding'
-  id: '__root__' | '/' | '/app' | '/auth' | '/onboarding'
+  to:
+    | '/'
+    | '/auth'
+    | '/onboarding'
+    | '/pricing'
+    | '/app/account'
+    | '/app/appointment'
+    | '/app/case'
+    | '/app/documents'
+    | '/app/form'
+    | '/app/help'
+    | '/app/insurance'
+    | '/app/review'
+    | '/app/submission'
+    | '/app/trip'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/onboarding'
+    | '/pricing'
+    | '/app/account'
+    | '/app/appointment'
+    | '/app/case'
+    | '/app/documents'
+    | '/app/form'
+    | '/app/help'
+    | '/app/insurance'
+    | '/app/review'
+    | '/app/submission'
+    | '/app/trip'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AppRoute: typeof AppRoute
+  AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
   OnboardingRoute: typeof OnboardingRoute
+  PricingRoute: typeof PricingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,14 +255,129 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/account': {
+      id: '/app/account'
+      path: '/account'
+      fullPath: '/app/account'
+      preLoaderRoute: typeof AppAccountRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/appointment': {
+      id: '/app/appointment'
+      path: '/appointment'
+      fullPath: '/app/appointment'
+      preLoaderRoute: typeof AppAppointmentRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/case': {
+      id: '/app/case'
+      path: '/case'
+      fullPath: '/app/case'
+      preLoaderRoute: typeof AppCaseRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/documents': {
+      id: '/app/documents'
+      path: '/documents'
+      fullPath: '/app/documents'
+      preLoaderRoute: typeof AppDocumentsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/form': {
+      id: '/app/form'
+      path: '/form'
+      fullPath: '/app/form'
+      preLoaderRoute: typeof AppFormRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/help': {
+      id: '/app/help'
+      path: '/help'
+      fullPath: '/app/help'
+      preLoaderRoute: typeof AppHelpRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/insurance': {
+      id: '/app/insurance'
+      path: '/insurance'
+      fullPath: '/app/insurance'
+      preLoaderRoute: typeof AppInsuranceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/review': {
+      id: '/app/review'
+      path: '/review'
+      fullPath: '/app/review'
+      preLoaderRoute: typeof AppReviewRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/submission': {
+      id: '/app/submission'
+      path: '/submission'
+      fullPath: '/app/submission'
+      preLoaderRoute: typeof AppSubmissionRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/trip': {
+      id: '/app/trip'
+      path: '/trip'
+      fullPath: '/app/trip'
+      preLoaderRoute: typeof AppTripRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAccountRoute: typeof AppAccountRoute
+  AppAppointmentRoute: typeof AppAppointmentRoute
+  AppCaseRoute: typeof AppCaseRoute
+  AppDocumentsRoute: typeof AppDocumentsRoute
+  AppFormRoute: typeof AppFormRoute
+  AppHelpRoute: typeof AppHelpRoute
+  AppInsuranceRoute: typeof AppInsuranceRoute
+  AppReviewRoute: typeof AppReviewRoute
+  AppSubmissionRoute: typeof AppSubmissionRoute
+  AppTripRoute: typeof AppTripRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAccountRoute: AppAccountRoute,
+  AppAppointmentRoute: AppAppointmentRoute,
+  AppCaseRoute: AppCaseRoute,
+  AppDocumentsRoute: AppDocumentsRoute,
+  AppFormRoute: AppFormRoute,
+  AppHelpRoute: AppHelpRoute,
+  AppInsuranceRoute: AppInsuranceRoute,
+  AppReviewRoute: AppReviewRoute,
+  AppSubmissionRoute: AppSubmissionRoute,
+  AppTripRoute: AppTripRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AppRoute: AppRoute,
+  AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
   OnboardingRoute: OnboardingRoute,
+  PricingRoute: PricingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
