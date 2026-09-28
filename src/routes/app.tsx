@@ -40,17 +40,16 @@ const nav = [
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   return (
-    <nav className="space-y-1">
+    <nav className="space-y-0.5">
       {nav.map((item) => (
         <Link
           key={item.to}
           to={item.to}
           onClick={onNavigate}
           activeOptions={{ exact: item.to === "/app" }}
-          className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-          activeProps={{ className: "bg-primary/10 text-primary hover:bg-primary/10" }}
+          className="group flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-sidebar-accent hover:text-foreground data-[status=active]:bg-sidebar-accent data-[status=active]:font-medium data-[status=active]:text-foreground"
         >
-          <item.icon className="h-4 w-4" />
+          <item.icon className="h-4 w-4 text-muted-foreground group-data-[status=active]:text-primary" />
           {item.label}
         </Link>
       ))}
@@ -64,9 +63,9 @@ function SideFooter() {
     <div className="space-y-3 border-t border-sidebar-border pt-4">
       <Link
         to="/app/account"
-        className="flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-sidebar-accent"
+        className="flex items-center gap-3 rounded-xl px-3 py-2 transition-colors hover:bg-sidebar-accent"
       >
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-sm font-semibold text-primary">
+        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
           {state.profile.firstName.charAt(0)}
           {state.profile.lastName.charAt(0)}
         </span>
@@ -77,7 +76,7 @@ function SideFooter() {
           <span className="block text-xs text-muted-foreground">Профиль и кейс</span>
         </span>
       </Link>
-      <div className="rounded-lg border border-sidebar-border bg-card p-3">
+      <div className="rounded-2xl border border-sidebar-border bg-card p-4">
         <div className="flex items-center justify-between">
           <span className="text-xs text-muted-foreground">Тариф</span>
           <Badge
@@ -125,10 +124,10 @@ function AppLayout() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto flex max-w-[1400px]">
-        <aside className="sticky top-0 hidden h-screen w-72 shrink-0 flex-col justify-between border-r border-sidebar-border bg-sidebar p-5 lg:flex">
+        <aside className="sticky top-0 hidden h-screen w-68 shrink-0 flex-col justify-between border-r border-sidebar-border bg-sidebar p-4 lg:flex">
           <div>
-            <Logo />
-            <p className="mt-1 mb-6 text-xs text-muted-foreground">
+            <Logo className="px-2 pt-1" />
+            <p className="mt-2 mb-6 px-2 text-xs text-muted-foreground">
               Туристическая виза в Италию · Москва
             </p>
             <NavList />
@@ -153,7 +152,7 @@ function AppLayout() {
               </SheetContent>
             </Sheet>
           </header>
-          <div className="px-4 py-8 sm:px-8 lg:py-10">
+          <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 lg:py-12">
             <Outlet />
           </div>
         </main>
