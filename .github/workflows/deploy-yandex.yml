@@ -1,0 +1,49 @@
+# Builds the Docker image, pushes it to Yandex Container Registry and rolls out
+# a new revision of the Serverless Container. Setup: deploy/yandex/README.md.
+#
+# The job is skipped until the YC_FOLDER_ID repository variable is set, so
+# pushes to main stay green before Yandex Cloud is configured.
+
+name: Deploy to Yandex Cloud
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-yandex
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: ${{ vars.YC_FOLDER_ID != '' }}
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: cr.yandex/${{ vars.YC_REGISTRY_ID }}/visitalia:${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to Yandex Container Registry
+        uses: yc-actions/yc-cr-login@v3
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+
+      - name: Build and push image
+        run: |
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+
+      - name: Deploy Serverless Container revision
+        uses: yc-actions/yc-sls-container-deploy@v5
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          folder-id: ${{ vars.YC_FOLDER_ID }}
+          container-name: ${{ vars.YC_CONTAINER_NAME || 'visitalia' }}
+          revision-image-url: ${{ env.IMAGE }}
+          revision-service-account-id: ${{ vars.YC_RUNTIME_SA_ID }}
+          revision-cores: 1
+          revision-core-fraction: 100
+          revision-memory: 512Mb
+          revision-concurrency: 8
+          revision-execution-timeout: 30
