@@ -93,7 +93,7 @@ function Onboarding() {
         </div>
 
         <div className="mt-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="eyebrow">
             Шаг {step + 1} из {steps.length}
           </p>
           <h1 className="mt-2 text-3xl">{steps[step]}</h1>
@@ -110,9 +110,7 @@ function Onboarding() {
                   { label: "Город подачи", value: "Москва" },
                 ].map((p) => (
                   <div key={p.label} className="rounded-xl border border-border bg-muted/50 p-4">
-                    <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                      {p.label}
-                    </p>
+                    <p className="text-[13px] text-muted-foreground">{p.label}</p>
                     <p className="mt-1 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                       {p.value} <Lock className="h-3 w-3 text-muted-foreground" />
                     </p>
