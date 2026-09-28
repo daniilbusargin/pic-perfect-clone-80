@@ -9,9 +9,16 @@ import type { DocStatus } from "@/lib/visa-case";
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link to="/" className={cn("inline-flex items-baseline gap-1", className)}>
-      <span className="font-display text-2xl leading-none text-primary">Visitalia</span>
-      <span className="h-1.5 w-1.5 rounded-full bg-accent-foreground/70" />
+    <Link to="/" className={cn("inline-flex items-center gap-2", className)}>
+      <span
+        aria-hidden
+        className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground"
+      >
+        V
+      </span>
+      <span className="text-lg font-semibold leading-none tracking-tight text-foreground">
+        Visitalia
+      </span>
     </Link>
   );
 }
@@ -30,13 +37,11 @@ export function SectionTitle({
   return (
     <div className="flex flex-wrap items-end justify-between gap-4">
       <div className="max-w-2xl">
-        {overline ? (
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            {overline}
-          </p>
+        {overline ? <p className="eyebrow">{overline}</p> : null}
+        <h1 className="mt-1.5 text-2xl text-foreground sm:text-3xl">{title}</h1>
+        {description ? (
+          <p className="mt-2 text-[15px] text-muted-foreground">{description}</p>
         ) : null}
-        <h1 className="mt-2 text-3xl leading-tight text-foreground sm:text-4xl">{title}</h1>
-        {description ? <p className="mt-3 text-sm text-muted-foreground">{description}</p> : null}
       </div>
       {children}
     </div>
@@ -56,17 +61,17 @@ const statusMap: Record<DocStatus, { label: string; className: string; icon: typ
   },
   checking: {
     label: "Проверяется",
-    className: "bg-accent text-accent-foreground border-accent",
+    className: "bg-muted text-foreground border-border",
     icon: Clock,
   },
   ok: {
     label: "Всё в порядке",
-    className: "bg-success/12 text-success border-success/30",
+    className: "bg-success/10 text-success border-success/25",
     icon: Check,
   },
   attention: {
     label: "Требует внимания",
-    className: "bg-warning/18 text-warning-foreground border-warning/40",
+    className: "bg-warning/12 text-warning-foreground border-warning/35",
     icon: AlertTriangle,
   },
 };
@@ -75,7 +80,10 @@ export function StatusPill({ status }: { status: DocStatus }) {
   const s = statusMap[status];
   const Icon = s.icon;
   return (
-    <Badge variant="outline" className={cn("gap-1.5 rounded-full px-2.5 py-1", s.className)}>
+    <Badge
+      variant="outline"
+      className={cn("gap-1.5 rounded-full px-2.5 py-1 font-medium", s.className)}
+    >
       <Icon className="h-3.5 w-3.5" />
       {s.label}
     </Badge>
@@ -127,9 +135,9 @@ export function CheckRow({ label, ok }: { label: string; ok: boolean }) {
 
 export function Stat({ label, value, hint }: { label: string; value: string; hint?: string }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-4">
-      <p className="text-xs uppercase tracking-wider text-muted-foreground">{label}</p>
-      <p className="mt-1.5 text-base font-semibold text-foreground">{value}</p>
+    <div className="rounded-2xl border border-border bg-card p-5">
+      <p className="text-[13px] text-muted-foreground">{label}</p>
+      <p className="mt-1 text-base font-semibold text-foreground">{value}</p>
       {hint ? <p className="mt-1 text-xs text-muted-foreground">{hint}</p> : null}
     </div>
   );
@@ -137,7 +145,7 @@ export function Stat({ label, value, hint }: { label: string; value: string; hin
 
 export function Disclaimer({ children }: { children: ReactNode }) {
   return (
-    <p className="rounded-lg border border-border bg-muted/60 p-3 text-xs text-muted-foreground">
+    <p className="rounded-xl bg-muted px-4 py-3 text-xs leading-relaxed text-muted-foreground">
       {children}
     </p>
   );

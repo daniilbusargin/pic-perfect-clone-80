@@ -28,12 +28,14 @@ const steps = [
 
 export function SiteHeader() {
   return (
-    <header className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5">
-      <Logo />
-      <nav className="flex items-center gap-2">
-        <Button asChild variant="ghost"><Link to="/pricing">Тарифы</Link></Button>
-        <Button asChild><Link to="/auth">Войти</Link></Button>
-      </nav>
+    <header className="sticky top-0 z-20 border-b border-border/60 bg-background/85 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
+        <Logo />
+        <nav className="flex items-center gap-1.5">
+          <Button asChild variant="ghost"><Link to="/pricing">Тарифы</Link></Button>
+          <Button asChild><Link to="/auth">Войти</Link></Button>
+        </nav>
+      </div>
     </header>
   );
 }
@@ -42,34 +44,51 @@ function Landing() {
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
-      <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-12 lg:grid-cols-2">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Туристическая виза · Москва</p>
-          <h1 className="mt-4 font-display text-5xl leading-tight text-foreground sm:text-6xl">
-            Виза в Италию <em className="text-primary">без лишней сложности</em>
+      <section className="hero-wash">
+        <div className="mx-auto max-w-3xl px-5 pt-20 pb-14 text-center sm:pt-28">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-[13px] text-muted-foreground">
+            <span className="h-2 w-2 rounded-full bg-primary" />
+            Туристическая виза · Москва
+          </span>
+          <h1 className="mt-6 text-4xl text-foreground sm:text-6xl">
+            Виза в Италию <span className="text-primary">без лишней сложности</span>
           </h1>
-          <p className="mt-5 max-w-lg text-muted-foreground">
+          <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
             Visitalia ведёт вас по шагам: от списка документов до подачи в визовом центре. Всё в одном визовом кейсе.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg"><Link to="/auth">Начать бесплатно</Link></Button>
             <Button asChild size="lg" variant="outline"><Link to="/pricing">Посмотреть тарифы</Link></Button>
           </div>
         </div>
-        <img src={hero} alt="Итальянская улица" className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg" />
+        <div className="mx-auto max-w-5xl px-5">
+          <img src={hero} alt="Итальянская улица" className="aspect-[16/8] w-full rounded-3xl border border-border object-cover" />
+        </div>
       </section>
-      <section className="mx-auto max-w-6xl px-5 pb-20">
-        <h2 className="font-display text-3xl text-foreground">Шесть шагов до визы</h2>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="mx-auto max-w-5xl px-5 py-24">
+        <p className="eyebrow text-center">Как это работает</p>
+        <h2 className="mt-2 text-center text-3xl text-foreground sm:text-4xl">Шесть шагов до визы</h2>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((s, i) => (
-            <div key={s.t} className="rounded-xl border border-border bg-card p-5">
-              <s.icon className="h-5 w-5 text-primary" />
-              <p className="mt-3 font-semibold text-foreground">{i + 1}. {s.t}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{s.d}</p>
+            <div key={s.t} className="rounded-2xl border border-border bg-card p-6 transition-colors hover:bg-surface">
+              <div className="flex items-center justify-between">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <s.icon className="h-5 w-5" />
+                </span>
+                <span className="text-sm font-medium text-muted-foreground">0{i + 1}</span>
+              </div>
+              <p className="mt-5 font-semibold text-foreground">{s.t}</p>
+              <p className="mt-1.5 text-sm text-muted-foreground">{s.d}</p>
             </div>
           ))}
         </div>
       </section>
+      <footer className="border-t border-border">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-8 text-sm text-muted-foreground">
+          <Logo />
+          <span>Подготовка к туристической визе в Италию</span>
+        </div>
+      </footer>
     </div>
   );
 }
