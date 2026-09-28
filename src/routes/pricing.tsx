@@ -29,7 +29,10 @@ function Pricing() {
   const { state, update, addHistory } = useVisaCase();
   const navigate = useNavigate();
   const choose = (p: Plan) => {
-    if (!state.authed) return navigate({ to: "/auth" });
+    if (!state.authed) {
+      navigate({ to: "/auth" });
+      return;
+    }
     update({ plan: p, lifecycle: "active" });
     addHistory(`Подключён тариф ${p}`);
     toast.success("Тариф подключён");

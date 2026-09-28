@@ -249,7 +249,7 @@ export function VisaCaseProvider({ children }: { children: ReactNode }) {
       state.submission.submitted ? 1 : 0,
     ];
     const readiness = Math.round(
-      (parts[0] * 45 + parts[1] * 15 + parts[2] * 12 + parts[3] * 16 + parts[4] * 12) * 1,
+      parts[0]! * 45 + parts[1]! * 15 + parts[2]! * 12 + parts[3]! * 16 + parts[4]! * 12,
     );
 
     const caseStatus = state.lifecycle === "expired"
